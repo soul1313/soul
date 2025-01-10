@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Растения и Природа</title>
+    <!-- Подключаем Font Awesome для иконок -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #d3d3d3;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            min-height: 100%;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #2b7a4b;
+            text-transform: uppercase;
+        }
+
+        .intro-text {
+            font-size: 22px;
+            color: #555;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            padding: 0 20px;
+            text-align: justify;
+            font-family: 'Georgia', serif;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .card {
+            background-color: #fff;
+            width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-text {
+            padding: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .card-text p {
+            line-height: 1.6;
+        }
+
+        .card-text button {
+            background-color: #2b7a4b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .card-text button:hover {
+            background-color: #24733d;
+        }
+
+        /* Стили для секции с текстом и картинкой (Розы) */
+        .image-text-section {
+            margin-top: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 100%;
+            text-align: left;
+            margin-bottom: 50px;
+            box-sizing: border-box;
+        }
+
+        .image-text-section img {
+            border-radius: 8px;
+            width: 40%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .image-text-section .text {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+            max-width: 55%;
+            padding: 0 10px;
+        }
+
+        /* Стили для кнопки входа */
+        .login-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            background-color: #2b7a4b;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            z-index: 9999;
+        }
+
+        .login-icon:hover {
+            background-color: #24733d;
+        }
+
+        /* Стили для окна авторизации */
+        .auth-container {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .auth-container h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2b7a4b;
+            text-align: center;
+        }
+
+        .auth-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .auth-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2b7a4b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .auth-container button:hover {
+            background-color: #24733d;
+        }
+
+        .auth-container .toggle-form {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #2b7a4b;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+            word-wrap: break-word;
+        }
+
+        .auth-container .toggle-form:hover {
+            text-decoration: none;
+        }
+
+        .register-form {
+            display: none;
+        }
+
+        /* Стили для помощи проекту */
+        .help-section {
+            margin-top: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2b7a4b;
+            text-align: center;
+            line-height: 1.5;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 50px auto;
+        }
+
+        .help-section a {
+            color: #2b7a4b;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .help-section a:hover {
+            text-decoration: underline;
+        }
+
+        .help-section .tg-icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Растения и Природа</h1>
+
+    <div class="intro-text">
+        Растения — неотъемлемая часть нашей жизни. Они не только создают атмосферу красоты и уюта, но и играют важную роль в экосистеме. Природа является домом для множества живых существ, а растения служат источником кислорода, пищи и лекарств. Мы все зависим от природы, и наша задача — сохранять и защищать её для будущих поколений.
+    </div>
+
+    <div class="cards-container">
+        <div class="card">
+            <img src="https://i.pinimg.com/474x/eb/f7/2a/ebf72a369bd0bbc56410018dc1161870.jpg">
+            <div class="card-text">
+                <p>Цветы вносят гармонию в наш мир, наполняя его красотой и ароматом.</p>
+                <button onclick="openNewPage()">Подробнее</button> <!-- Кнопка "Подробнее" -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://i.pinimg.com/474x/e0/2b/a6/e02ba62eecdbc1399d4139c32d19a2db.jpg" alt="Растение 2">
+            <div class="card-text">
+                <p>Листья деревьев напоминают нам о цикличности природы и важности заботы о планете.</p>
+                <button onclick="openNewPage()">Подробнее</button> <!-- Кнопка "Подробнее" -->
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://i.pinimg.com/474x/7e/61/60/7e6160ddf4e616adef93d9365ab59268.jpg" alt="Растение 3">
+            <div class="card-text">
+                <p>Цветы украшают мир, наполняя его яркими красками и удивительным ароматом.</p>
+                <button onclick="openNewPage()">Подробнее</button> <!-- Кнопка "Подробнее" -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Секция текста с картинкой -->
+    <div class="image-text-section">
+        <img src="https://i.pinimg.com/474x/db/d1/0f/dbd10f921f100fe0fef083fdd6123495.jpg" alt="Роза">
+        <div class="text">
+            <h2>Розы: Символ любви и красоты</h2>
+            <p>Розы — одни из самых известных и популярных цветов в мире. Они символизируют любовь, страсть и романтику. Розы бывают разных цветов, каждый из которых имеет свое значение. Красные розы — это символ любви, белые — чистоты и невинности, а желтые — дружбы. Эти удивительные цветы не только красивы, но и имеют множество применений, от украшений до ароматерапии.</p>
+        </div>
+    </div>
+
+    <!-- Иконка для открытия формы авторизации -->
+    <div class="login-icon" onclick="toggleAuthForm()">
+        <i class="fas fa-user"></i>
+    </div>
+
+    <!-- Форма авторизации -->
+    <div class="auth-container">
+        <h2>Вход в аккаунт</h2>
+        <div class="login-form">
+            <input type="text" placeholder="Логин">
+            <input type="password" placeholder="Пароль">
+            <button onclick="login()">Войти</button>
+            <p class="toggle-form" onclick="toggleForm('register')">Зарегистрироваться</p>
+        </div>
+        <div class="register-form">
+            <input type="text" placeholder="Логин" id="register-login">
+            <input type="password" placeholder="Пароль" id="register-password">
+            <input type="email" placeholder="Email" id="register-email">
+            <button onclick="register()">Зарегистрироваться</button>
+            <p class="toggle-form" onclick="toggleForm('login')">Войти</p>
+        </div>
+    </div>
+
+    <!-- Секция помощи проекту -->
+    <div class="help-section">
+        <p>Если вам понравился проект, вы можете поддержать его или связаться с нами для получения дополнительной информации.</p>
+        <a href="tg://resolve?domain=soul_angelsss">
+            <i class="fab fa-telegram-plane tg-icon"></i> Написать в Telegram: @soul_angelsss @GMM_001
+        </a>
+    </div>
+
+    <script>
+        
+        function openNewPage() {
+    const newPage = window.open('about:blank', '_blank');  // Открываем пустую страницу
+    newPage.document.write(`
+        <html>
+            <head><title>Аромат Растений: Волшебство Природы</title></head>
+            <style>
+                body {
+                    background-color: #d3d3d3; /* Нежно-серый цвет фона */
+                    font-family: 'Arial', sans-serif;
+                    color: #333;
+                    padding: 20px;
+                    line-height: 1.6;
+                    text-align: justify;
+                }
+                h1, h2 {
+                    color: #2b7a4b; /* Зеленый цвет заголовков */
+                }
+            </style>
+            <body>
+                <h1>Аромат Растений: Волшебство Природы</h1>
+                <p>Аромат растений — это не просто запах, это целая палитра ощущений, эмоций и воспоминаний, заключенных в листьях, цветах и корнях. Он сопровождает нас на протяжении всей жизни, влияет на наше настроение, восприятие мира и даже здоровье. С древности люди используют растения не только для утоления голода, но и для того, чтобы наполнить пространство приятным ароматом, очистить воздух и создать атмосферу уюта.</p>
+                <p>Ароматы растений варьируются от лёгких и невидимых до насыщенных и глубоких. Это как шедевр природы, где каждый запах несет в себе какую-то особенность — будь то сладковатый запах лаванды, пряный аромат розмарина или свежий, почти прохладный запах мяты. Эти запахи не только радуют наши носы, но и воздействуют на нас на глубоком, психологическом уровне.</p>
+                <h2>Природа аромата растений</h2>
+                <p>Запах растений — это результат их химического состава. Многие растения выделяют летучие вещества, которые могут быть как полезными, так и отпугивающими. Например, запах цитрусовых способен активировать центры удовольствия в мозге, а лаванда с её успокаивающим и расслабляющим ароматом помогает снять напряжение и стресс.</p>
+                <p>Некоторые растения выделяют аромат, чтобы привлечь опылителей — пчел, бабочек или даже летучих мышей. Розы, жасмин, лаванда — их ароматы привлекают этих существ, которые играют важную роль в экосистеме, опыляя цветы и обеспечивая растения размножением. Запахи, которые они излучают, могут быть сладкими или острыми, но все они выполняют важную роль в жизни растений.</p>
+                <h2>Как ароматы растений влияют на человека</h2>
+                <p>Запахи растений воздействуют на человеческое восприятие и даже на физическое состояние. Приятные запахи могут способствовать улучшению настроения, снятию стресса и напряжения, а также повышению продуктивности. Например, запах лаванды известен своими расслабляющими свойствами и часто используется в ароматерапии для борьбы с бессонницей и тревогой.</p>
+                <p>Не менее полезны и другие ароматы. Например, запах розмарина считается полезным для улучшения концентрации и памяти, а запах цитрусовых — для бодрости и энергии. Некоторые растения, такие как шалфей, имеют антисептические и очищающие свойства, благодаря чему их запах способен улучшать качество воздуха в помещении.</p>
+                <h2>Растения в интерьере и ароматерапия</h2>
+                <p>Сегодня ароматы растений активно используют не только в медицине, но и в интерьере. Ароматерапия — это искусство использования запахов для улучшения психоэмоционального состояния человека. Эфирные масла растений, такие как масло лаванды, мяты, иланг-иланга или лимона, используются для создания ароматных смесей, которые можно применять как для массажа, так и для ингаляций.</p>
+                <p>Домашние растения также могут стать источником ароматов, которые улучшат атмосферу вашего жилья. Например, аромат фикуса, мирта или цитрусовых деревьев в комнате создаст ощущение свежести и чистоты. Такие растения не только очищают воздух, но и насыщают пространство неповторимыми запахами, которые расслабляют и дарят умиротворение.</p>
+                <h2>Запахи и их роль в культуре и традициях</h2>
+                <p>Аромат растений занимает важное место в культурах и религиозных традициях разных народов. Во многих странах существуют специальные обряды и ритуалы, в которых используются благовония или сожжённые травы. Так, например, в Индии сжигание сандалового дерева считается способом очистить пространство и ум от негативных энергий.</p>
+                <p>В Древнем Египте использовали ароматные масла и травы в медицинских целях, а также для бальзамирования. Запахи ассоциировались с божественным и служили средством связи с высшими силами. В то время аромат был настолько ценным, что его использовали не только для духовных практик, но и для создания изысканных парфюмерных композиций.</p>
+                <h2>Заключение</h2>
+                <p>Аромат растений — это не только природное явление, но и важная часть нашего восприятия мира. Он помогает создать уют, дарует нам эмоциональный комфорт, помогает расслабиться и снять стресс. Каждый аромат растений имеет свою уникальную историю и значение, и мы с каждым днём всё больше осознаём, как важен этот запах для нашего здоровья и душевного состояния.</p>
+                <p>Природа и её аромат — это неотъемлемая часть нашей жизни. Пусть эти запахи наполняют ваш мир, приносят радость и покой, а также напоминают о том, как важно сохранять и защищать нашу планету для будущих поколений.</p>
+            </body>
+        </html>
+    `);
+    newPage.document.close();  // Закрываем поток документа, чтобы он отобразился
+}
+
+
+
+        function toggleAuthForm() {
+            const authContainer = document.querySelector('.auth-container');
+            if (authContainer.style.display === 'block') {
+                authContainer.style.opacity = '0';
+                setTimeout(() => {
+                    authContainer.style.display = 'none';
+                }, 300);
+            } else {
+                authContainer.style.display = 'block';
+                setTimeout(() => {
+                    authContainer.style.opacity = '1';
+                }, 10);
+            }
+        }
+
+        function toggleForm(formType) {
+            const registerForm = document.querySelector('.register-form');
+            const loginForm = document.querySelector('.login-form');
+            
+            if (formType === 'register') {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            } else {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+            }
+        }
+
+        function register() {
+            const login = document.getElementById('register-login').value;
+            const password = document.getElementById('register-password').value;
+            const email = document.getElementById('register-email').value;
+
+            if (login && password && email) {
+                alert('Регистрация успешна!');
+                toggleAuthForm(); // Закрыть форму после регистрации
+            } else {
+                alert('Пожалуйста, заполните все поля!');
+            }
+        }
+
+        function login() {
+            alert('Вход выполнен!');
+            toggleAuthForm(); // Закрыть форму после входа
+        }
+    </script>
+</body>
+</html>
